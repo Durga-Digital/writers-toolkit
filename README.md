@@ -1,13 +1,14 @@
 # writers-toolkit
 
-Two skills for writing and reviewing long-form content — knowledge-base articles and blog posts — using a **researcher → writer → editor** loop. Built for Claude Code, Codex, and Gemini CLI.
+Skills for writing and reviewing long-form content — knowledge-base articles and blog posts — using a **researcher → writer → editor** loop. Built for Claude Code, Codex, and Gemini CLI.
 
 ## Skills
 
-- **`conclude-docs-writer`** — write or review knowledge-base articles for [Conclude.fyi](https://conclude.fyi) import. Covers the kb-starter folder schema (numeric-prefixed categories, YAML frontmatter, `_category.md` files), and a gap-audit method for keeping docs aligned with shipped product features.
-- **`blog-writer`** — draft, edit, or plan long-form blog posts. Covers topic selection, outline and hook craft, voice and length, SEO metadata, internal linking, and the AI-tells to strip.
+- **`conclude-docs-writer`** — write or review knowledge-base articles for [Conclude.fyi](https://conclude.fyi) import. Covers the kb-starter folder schema (numeric-prefixed categories, YAML frontmatter, `_category.md` files), monorepo placement, a branch-aware preflight that flags doc-relevant diffs, and a gap-audit method for keeping docs aligned with shipped product features.
+- **`blog-writer`** — draft, edit, or plan long-form blog posts. Covers topic selection, outline and hook craft, voice and length, SEO metadata, internal linking, AI-tells to strip, and a "blog-worthy" gate that filters changes before drafting.
+- **`docs-init`** — bootstrap a `kb-starter/` tree for a repo that has no docs yet. Detects monorepo layout, asks once where the KB should live, suggests starter categories from stack signals (Stripe, auth libs, routers, FAQ constants), and scaffolds placeholders for the writer.
 
-Both skills run the same three-role loop:
+The writing/review skills run the same three-role loop:
 
 ```
 Researcher  ──▶  Writer  ──▶  Editor
@@ -28,8 +29,9 @@ After install, the skills appear as:
 
 - `writers-toolkit:conclude-docs-writer`
 - `writers-toolkit:blog-writer`
+- `writers-toolkit:docs-init`
 
-Trigger them by description match (e.g. "review my blog draft", "are our docs current?") or invoke directly via the `Skill` tool.
+Trigger them by description match (e.g. "review my blog draft", "are our docs current?", "init the KB") or invoke directly via the `Skill` tool.
 
 ### Gemini CLI
 
@@ -49,9 +51,10 @@ Codex doesn't yet have a first-class plugin manager. The simplest install is to 
 git clone https://github.com/Durga-Digital/writers-toolkit.git ~/Src/writers-toolkit
 ln -s ~/Src/writers-toolkit/skills/conclude-docs-writer ~/.agents/skills/conclude-docs-writer
 ln -s ~/Src/writers-toolkit/skills/blog-writer ~/.agents/skills/blog-writer
+ln -s ~/Src/writers-toolkit/skills/docs-init ~/.agents/skills/docs-init
 ```
 
-`git pull` updates both skills atomically.
+`git pull` updates all skills atomically.
 
 ### ChatGPT
 

@@ -11,6 +11,55 @@ Conclude.fyi imports a folder of markdown files where folders become categories 
 
 **Core principle:** Docs are part of the product surface. When the code ships a new feature, plan limit, or tier behaviour, the docs that explain it must ship in the same week.
 
+## Preflight — read the branch first
+
+Before any doc work, sample what's actually changed. The branch and diff are the strongest signal of which docs need updating.
+
+```bash
+git branch --show-current
+git log "$(git merge-base HEAD main 2>/dev/null || git merge-base HEAD master)"..HEAD --stat
+```
+
+Classify changed paths against these categories — touching any of them flags a likely doc update:
+
+- **User-facing routes / pages** — `app/`, `pages/`, `routes/` (excluding tests and API internals).
+- **Tier / entitlements / pricing config** — top source of doc drift.
+- **Auth / signup flow** — onboarding articles drift first when auth changes.
+- **Public env vars or feature flags** — anything user-visible or that gates UI.
+- **FAQ source files** — if FAQs live in code.
+
+Branch-name hints (`feat/`, `feature/`, `fix/`) only nudge the call — diff content is the real signal. If the diff is tests-only, internal refactors, infra, or unrelated tooling, skip the doc pass and say so.
+
+When the diff is doc-relevant, lead with a punch list — "`<feature>` → article X needs updating; pricing change → article Y; new tier → write article Z" — before opening the researcher loop. Don't draft until the user picks the scope.
+
+If no docs tree exists yet, hand off to the `docs-init` skill before writing articles.
+
+## Placement — where docs live (ask once, cache)
+
+Before creating or editing files, confirm the docs root.
+
+**Monorepo markers:** `pnpm-workspace.yaml`, `turbo.json`, `nx.json`, `lerna.json`, `apps/<x>/package.json`, `packages/<x>/package.json`.
+
+If detected, ask the user once:
+
+> "Monorepo detected. Where should the KB live?
+> 1. Root `kb-starter/` (one KB across the whole product)
+> 2. `apps/<name>/kb-starter/` for a specific app
+> 3. Other path"
+
+For single-package repos, look for an existing docs root — `kb-starter/`, `docs/`, `content/docs/`, `website/docs/` — and confirm before writing anywhere new.
+
+Cache the answer in `.claude/writers-toolkit.json` so subsequent runs don't re-ask:
+
+```json
+{
+  "docsRoot": "apps/marketing/kb-starter",
+  "scope": "app:marketing"
+}
+```
+
+Re-ask only if the file is missing, the path no longer exists, or the user explicitly asks to switch scope.
+
 ## The three-role loop
 
 Use the loop for any doc work larger than a single-paragraph fix — new categories, gap audits, multi-article rewrites, post-release sweeps. Each role is a distinct pass over the work; the loop iterates until the editor signs off.
@@ -209,5 +258,6 @@ These signals mean "run the gap audit":
 - A major feature ship just landed (new tool, new tier, new auth method).
 - Pricing or plan limits changed.
 - Brand or domain changed.
+- Working on a feature branch where the diff touches user-facing paths (run the preflight to confirm).
 
 After the audit, write a concise punch list of what needs updating before opening edits. Don't batch unrelated changes in one commit — split by category or by concern.

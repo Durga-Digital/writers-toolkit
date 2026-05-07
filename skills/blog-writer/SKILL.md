@@ -13,6 +13,25 @@ Blog posts are different from KB articles. KB articles unblock a user mid-task; 
 
 **Not for:** schema-strict knowledge-base content. Use the conclude-docs-writer skill for that.
 
+## Preflight — is this even a blog?
+
+Before drafting, ground the post in what actually shipped. Check the branch and diff:
+
+```bash
+git branch --show-current
+git log "$(git merge-base HEAD main 2>/dev/null || git merge-base HEAD master)"..HEAD --stat
+```
+
+Then run the **blog-worthy gate**. A change earns a blog post when at least two of these hold:
+
+1. **Story** — a regulatory shift, an integration launch, a new tier, a "first" claim, or a number a reader will remember.
+2. **Search-intent reach** — addresses a query strangers run, not just an existing user mid-task.
+3. **Six-month half-life** — still useful in six months, not a release-note timestamp.
+
+Two of three → likely blog. One or zero → release note or KB update; hand to `conclude-docs-writer`.
+
+Bug fixes, refactors, internal tooling, dependency bumps, and copy tweaks are not blog-worthy by default. Don't manufacture an angle for them. If the user insists, surface the weak signal and ask what story they want to tell before drafting.
+
 ## The three-role loop
 
 Use the loop for any post longer than ~600 words. Each role is a distinct pass; the loop iterates until the editor signs off.
@@ -157,5 +176,6 @@ These signals mean "engage the loop":
 - User asks "what should I blog about" — start with the researcher role.
 - A topical event (rate change, regulatory shift, product launch) creates a window for a timely post.
 - Existing post needs a refresh because facts have drifted.
+- A feature branch ships changes that pass the blog-worthy gate above.
 
 After research, write a one-paragraph brief and confirm the angle with the user before drafting. Don't ship a 2000-word post if the angle was wrong.

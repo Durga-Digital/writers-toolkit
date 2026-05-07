@@ -1,7 +1,7 @@
 {
   "name": "writers-toolkit",
   "description": "Skills for writing and reviewing knowledge-base docs and blog posts — researcher → writer → editor loops with format-specific craft and SEO mechanics.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": {
     "name": "Aashiq Durga",
     "email": "aashiqdurga@gmail.com"
