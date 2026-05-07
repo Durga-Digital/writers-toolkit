@@ -1,0 +1,6 @@
+{
+  "name": "writers-toolkit",
+  "description": "Skills for writing and reviewing knowledge-base docs and blog posts.",
+  "version": "0.1.0",
+  "contextFileName": "GEMINI.md"
+}

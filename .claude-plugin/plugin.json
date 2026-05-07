@@ -1,0 +1,21 @@
+{
+  "name": "writers-toolkit",
+  "description": "Skills for writing and reviewing knowledge-base docs and blog posts — researcher → writer → editor loops with format-specific craft and SEO mechanics.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Aashiq Durga",
+    "email": "aashiqdurga@gmail.com"
+  },
+  "homepage": "https://github.com/AashiqDurga/writers-toolkit",
+  "repository": "https://github.com/AashiqDurga/writers-toolkit",
+  "license": "MIT",
+  "keywords": [
+    "skills",
+    "writing",
+    "docs",
+    "blog",
+    "seo",
+    "knowledge-base",
+    "conclude"
+  ]
+}

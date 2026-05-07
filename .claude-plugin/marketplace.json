@@ -1,0 +1,20 @@
+{
+  "name": "writers-toolkit",
+  "description": "Marketplace for the writers-toolkit plugin — writing and review skills for KB docs and blog posts.",
+  "owner": {
+    "name": "Aashiq Durga",
+    "email": "aashiqdurga@gmail.com"
+  },
+  "plugins": [
+    {
+      "name": "writers-toolkit",
+      "description": "Skills for writing and reviewing knowledge-base docs and blog posts — researcher → writer → editor loops with format-specific craft and SEO mechanics.",
+      "version": "0.1.0",
+      "source": "./",
+      "author": {
+        "name": "Aashiq Durga",
+        "email": "aashiqdurga@gmail.com"
+      }
+    }
+  ]
+}
