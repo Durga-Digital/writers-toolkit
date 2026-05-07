@@ -20,7 +20,7 @@ Researcher  ──▶  Writer  ──▶  Editor
 ### Claude Code
 
 ```bash
-/plugin marketplace add AashiqDurga/writers-toolkit
+/plugin marketplace add Durga-Digital/writers-toolkit
 /plugin install writers-toolkit@writers-toolkit
 ```
 
@@ -36,7 +36,7 @@ Trigger them by description match (e.g. "review my blog draft", "are our docs cu
 Add as a Gemini extension. The `gemini-extension.json` and `GEMINI.md` at the repo root tell Gemini where to find the skills:
 
 ```bash
-gemini extensions install https://github.com/AashiqDurga/writers-toolkit
+gemini extensions install https://github.com/Durga-Digital/writers-toolkit
 ```
 
 Skills activate via Gemini's `activate_skill` tool when the description matches the user's request.
@@ -46,7 +46,7 @@ Skills activate via Gemini's `activate_skill` tool when the description matches 
 Codex doesn't yet have a first-class plugin manager. The simplest install is to symlink the `skills/` directory into Codex's personal-skills folder:
 
 ```bash
-git clone https://github.com/AashiqDurga/writers-toolkit.git ~/Src/writers-toolkit
+git clone https://github.com/Durga-Digital/writers-toolkit.git ~/Src/writers-toolkit
 ln -s ~/Src/writers-toolkit/skills/conclude-docs-writer ~/.agents/skills/conclude-docs-writer
 ln -s ~/Src/writers-toolkit/skills/blog-writer ~/.agents/skills/blog-writer
 ```
